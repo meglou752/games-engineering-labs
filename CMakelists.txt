@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.11)
+project(setup CXX)
+
+# Require modern C++
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+#### Setup Directories ####
+# Main output directory
+set(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
+
+#### Add External Dependencies ####
+add_subdirectory("lib/SFML")
+set(SFML_INCS "${CMAKE_SOURCE_DIR}/lib/SFML/include")
+# You usually don't need link_directories when SFML is added via add_subdirectory,
+# but keep it if your layout requires it:
+link_directories("${CMAKE_BINARY_DIR}/lib/SFML/lib")
+
+#### Practical 1 ####
+#add_executable(lab_one lab_one/main.cpp)        # <- choose ONE name and stick to it
+#target_include_directories(lab_one PRIVATE ${SFML_INCS})
+#target_link_libraries(lab_one PRIVATE sfml-graphics)  # sfml-graphics pulls window/system
+
+#### Practical 2 ####
+add_executable(lab_two lab_two/main.cpp)        # <- choose ONE name and stick to it
+target_include_directories(lab_two PRIVATE ${SFML_INCS})
+target_link_libraries(lab_two PRIVATE sfml-graphics)  # sfml-graphics pulls window/system
